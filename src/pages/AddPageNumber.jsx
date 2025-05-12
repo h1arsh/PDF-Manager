@@ -18,15 +18,45 @@ const AddPageNumber = () => {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!pdfFile) return;
-    
-    setIsProcessing(true);
-    // Here you'll add the API call to your backend
-    // For now, we'll just log the values
-    console.log({ pdfFile, position, size });
+  e.preventDefault();
+  if (!pdfFile) return;
+  
+  setIsProcessing(true);
+  
+  try {
+    const formData = new FormData();
+    formData.append('pdfFile', pdfFile);
+    formData.append('position', position);
+    formData.append('size', size);
+
+    const response = await fetch('http://localhost:5000/api/pdf/add-page-numbers', {
+        method: 'POST',
+        body: formData,
+      });
+
+    if (!response.ok) {
+      throw new Error('Failed to process PDF');
+    }
+
+    // Convert response to blob
+    const blob = await response.blob();
+      const downloadUrl = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `numbered-${pdfFile.name}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(downloadUrl);
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert(`Error: ${error.message}. Please try again.`);
+  } finally {
     setIsProcessing(false);
-  };
+  }
+};
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">

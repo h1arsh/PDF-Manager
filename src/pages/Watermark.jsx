@@ -12,8 +12,6 @@ const WatermarkPDF = () => {
   const [opacity, setOpacity] = useState(0.5);
 
   // Image Watermark State
-  const [imagePdfFile, setImagePdfFile] = useState(null);
-  const [watermarkImage, setWatermarkImage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const { getRootProps: getTextPdfRootProps, getInputProps: getTextPdfInputProps } = useDropzone({
@@ -24,83 +22,54 @@ const WatermarkPDF = () => {
     }
   });
 
-  const { getRootProps: getPdfRootProps, getInputProps: getPdfInputProps } = useDropzone({
-    accept: '.pdf',
-    multiple: false,
-    onDrop: acceptedFiles => {
-      setImagePdfFile(acceptedFiles[0]);
-    }
-  });
-
-  const { getRootProps: getImageRootProps, getInputProps: getImageInputProps } = useDropzone({
-    accept: 'image/*',
-    multiple: false,
-    onDrop: acceptedFiles => {
-      setWatermarkImage(acceptedFiles[0]);
-    }
-  });
 
   const handleTextWatermarkSubmit = async (e) => {
-    e.preventDefault();
-    if (textPdfFiles.length === 0 || !watermarkText) return;
-    
-    setIsProcessing(true);
-    
-    try {
-      const formData = new FormData();
-      textPdfFiles.forEach(file => {
-        formData.append('pdfs', file);
-      });
-      formData.append('watermarkText', watermarkText);
-      formData.append('fontSize', fontSize);
-      formData.append('fontFamily', fontFamily);
-      formData.append('rotation', rotation);
-      formData.append('opacity', opacity);
+  e.preventDefault();
+  if (textPdfFiles.length === 0 || !watermarkText) return;
+  
+  setIsProcessing(true);
+  
+  try {
+    const formData = new FormData();
+    textPdfFiles.forEach(file => {
+      formData.append('pdfs', file);
+    });
+    formData.append('watermarkText', watermarkText);
+    formData.append('fontSize', fontSize);
+    formData.append('fontFamily', fontFamily);
+    formData.append('rotation', rotation);
+    formData.append('opacity', opacity);
 
-      console.log('Adding text watermark:', {
-        files: textPdfFiles,
-        text: watermarkText,
-        fontSize,
-        fontFamily,
-        rotation,
-        opacity
-      });
-      
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // API call would go here
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsProcessing(false);
+    const response = await fetch('http://localhost:5000/api/pdf/text-watermark', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to add watermark');
     }
-  };
 
-  const handleImageWatermarkSubmit = async (e) => {
-    e.preventDefault();
-    if (!imagePdfFile || !watermarkImage) return;
-    
-    setIsProcessing(true);
-    
-    try {
-      const formData = new FormData();
-      formData.append('imgpdf', imagePdfFile);
-      formData.append('img', watermarkImage);
+    // Handle the response (PDF or ZIP)
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = textPdfFiles.length === 1 
+      ? `watermarked_${textPdfFiles[0].name}` 
+      : 'watermarked_pdfs.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
 
-      console.log('Adding image watermark:', {
-        pdf: imagePdfFile,
-        image: watermarkImage
-      });
-      
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // API call would go here
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsProcessing(false);
-    }
-  };
+  } catch (error) {
+    console.error('Error:', error);
+    alert(error.message);
+  } finally {
+    setIsProcessing(false);
+  }
+};
 
   return (
     <>
@@ -250,74 +219,6 @@ const WatermarkPDF = () => {
                     </span>
                   ) : (
                     'Watermark PDFs'
-                  )}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        {/* Image Watermark Section */}
-        <div className="mt-20">
-          <div className="text-center">
-            <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-                Image Watermark PDF
-              </span>
-            </h1>
-            <h5 className="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">
-              Stamp an image or text over your PDF in seconds
-            </h5>
-          </div>
-
-          <div className="mt-12 max-w-3xl mx-auto">
-            <form onSubmit={handleImageWatermarkSubmit}>
-              <div className="space-y-6">
-                <div 
-                  {...getPdfRootProps()} 
-                  className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-400 transition-colors cursor-pointer"
-                >
-                  <input {...getPdfInputProps()} />
-                  <h3 className="text-lg font-medium text-gray-900">Select PDF file</h3>
-                  <p className="mt-1 text-sm text-gray-500">Drag and drop or click to browse</p>
-                  {imagePdfFile && (
-                    <p className="mt-2 text-sm font-medium text-gray-900">
-                      Selected: {imagePdfFile.name}
-                    </p>
-                  )}
-                </div>
-
-                <div 
-                  {...getImageRootProps()} 
-                  className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-400 transition-colors cursor-pointer"
-                >
-                  <input {...getImageInputProps()} />
-                  <h3 className="text-lg font-medium text-gray-900">Select image file</h3>
-                  <p className="mt-1 text-sm text-gray-500">Drag and drop or click to browse (JPG/PNG)</p>
-                  {watermarkImage && (
-                    <p className="mt-2 text-sm font-medium text-gray-900">
-                      Selected: {watermarkImage.name}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="mt-8 flex justify-center">
-                <button 
-                  type="submit" 
-                  className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-10 rounded-lg transition-colors text-lg"
-                  disabled={!imagePdfFile || !watermarkImage || isProcessing}
-                >
-                  {isProcessing ? (
-                    <span className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Applying Watermark...
-                    </span>
-                  ) : (
-                    'Add Watermark'
                   )}
                 </button>
               </div>

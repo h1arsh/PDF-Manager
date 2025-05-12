@@ -19,36 +19,44 @@ const DeletePDFPages = () => {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!pdfFile || !pageNumbers) return;
-    
-    setIsProcessing(true);
-    
-    try {
-      const formData = new FormData();
-      formData.append('pdfFile', pdfFile);
-      formData.append('pageNumbers', pageNumbers);
+  e.preventDefault();
+  if (!pdfFile || !pageNumbers) return;
+  
+  setIsProcessing(true);
+  
+  try {
+    const formData = new FormData();
+    formData.append('pdfFile', pdfFile);
+    formData.append('pageNumbers', pageNumbers);
 
-      // This would be your API call in a real implementation
-      console.log('Submitting:', { fileName, pageNumbers });
-      
-      // Simulate API processing delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // In a real app, you would handle the response and provide download
-      // const response = await fetch('/api/delete-pages', {
-      //   method: 'POST',
-      //   body: formData
-      // });
-      // const result = await response.blob();
-      // Create download link for the processed PDF
+    const response = await fetch('http://localhost:5000/api/pdf/delete-pages', {
+      method: 'POST',
+      body: formData
+    });
 
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsProcessing(false);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to process PDF');
     }
-  };
+
+    // Create download link for the processed PDF
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `modified_${fileName}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert(error.message || 'An error occurred while processing the PDF');
+  } finally {
+    setIsProcessing(false);
+  }
+};
 
   return (
     <>
