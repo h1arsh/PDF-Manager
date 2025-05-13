@@ -17,35 +17,37 @@ const PDFToWord = () => {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!pdfFile) return;
-    
-    setIsProcessing(true);
-    
-    try {
-      const formData = new FormData();
-      formData.append('file', pdfFile);
+  e.preventDefault();
+  if (!pdfFile) return;
 
-      // This would be your API call in a real implementation
-      console.log('Submitting PDF for Word conversion:', fileName);
-      
-      // Simulate API processing delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // In a real app, you would handle the response and provide download
-      // const response = await fetch('/convert', {
-      //   method: 'POST',
-      //   body: formData
-      // });
-      // const result = await response.blob();
-      // Create download link for the Word file
+  setIsProcessing(true);
 
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsProcessing(false);
-    }
-  };
+  try {
+    const formData = new FormData();
+    formData.append('file', pdfFile);
+
+    const response = await fetch('http://localhost:5000/api/pdf/convert-to-word', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) throw new Error('Conversion failed');
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'converted.docx';
+    link.click();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Failed to convert PDF');
+  } finally {
+    setIsProcessing(false);
+  }
+};
+
 
   return (
     <>

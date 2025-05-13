@@ -49,11 +49,7 @@ const MainContent = () => {
           </li>
         </ul>
 
-        <div className="mt-8 flex justify-center">
-          <button className="bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white font-medium py-3 px-8 rounded-lg shadow-md transition-all transform hover:scale-105">
-            Merge PDFs Now
-          </button>
-        </div>
+        
       </div>
     </div>
   );

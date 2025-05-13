@@ -16,15 +16,43 @@ const PDFCompressor = () => {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!pdfFile) return;
-    
-    setIsProcessing(true);
-    // Here you'll add the API call to your backend
-    // For now, we'll just log the values
-    console.log({ pdfFile, compressionLevel });
+  e.preventDefault();
+  if (!pdfFile) return;
+  
+  setIsProcessing(true);
+  
+  try {
+    const formData = new FormData();
+    formData.append('pdfFile', pdfFile);
+    formData.append('compressionLevel', compressionLevel);
+
+    const response = await fetch('/api/compress', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Compression failed');
+    }
+
+    // Create download link
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `compressed_${pdfFile.name}`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Failed to compress PDF. Please try again.');
+  } finally {
     setIsProcessing(false);
-  };
+  }
+};
 
   return (
     <>
