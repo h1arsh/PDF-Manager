@@ -7,8 +7,8 @@ const app = express();
 // Enable CORS for your Vite frontend
 app.use(cors({
   origin: 'http://localhost:5173',
-  methods: ['POST'],
-  allowedHeaders: ['Content-Type']
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Routes

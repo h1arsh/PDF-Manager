@@ -1,0 +1,74 @@
+Harsh Kumar
+8545877642 | harshkumar765421@gmail.com | linkedin.com/in/harshkumar | github.com/harshkumar
+
+Education
+Graphic Era Deemed to be University
+Bachelor of Technology in Computer Science and Engineering (GPA: 8.73 / 10.00)
+
+Dehradun,Uttarakhand
+Sept 2021- Present
+
+Kendriya Vidyalaya
+
+Shahjahanpur, Uttarpradesh
+
+C.B.S.E (12th) (89.4 %)
+
+April 2020 – March 2021
+
+Kendriya Vidyalaya
+
+Shahjahanpur, Uttarpradesh
+
+C.B.S.E (10th) (87.4 %)
+
+April 2018 – March 2019
+
+Projects
+Multiplayer Chess Game | Node.js, Express.js, Socket.IO, JS, Tailwind CSS
+June 2024 - July 2024
+• Developed a real-time multiplayer chess game with 100% seamless gameplay using Node.js, Express.js, and
+Socket.IO to enable efficient server-client communication.
+• Designed a responsive interface with Tailwind CSS and JavaScript for a seamless user experience.
+• Optimized game performance for real-time synchronization and low-latency gameplay.
+Live Link: Play Chess Online GitHub: Code
+Virtual Mouse | OpenCV, MediaPipe, PyAutoGUI, Python
+May 2024 - June 2024
+• Implemented a sophisticated hand gesture-based cursor control system using OpenCV, MediaPipe, PyAutoGUI,
+and pynput, achieving precise movement and control.
+• Enabled precise cursor control with single-click and double-click through gesture recognition.
+• Integrated a screenshot capture feature, expanding the system’s capabilities.
+GitHub: Code
+Algorithm Visualizer | React.js, JavaScript
+July 2024 - Aug 2024
+• Created an interactive algorithm visualizer in React.js for key graph algorithms: Dijkstra’s, BFS, DFS,
+Bellman-Ford, and Kruskal’s.
+• Integrated dynamic visualizations to represent algorithm execution, enhancing understanding of graph traversal.
+• Improved user experience with smooth animations and intuitive controls.
+Live Link: Visualizer GitHub: Code
+Speech Translator | React.js, JS, APIs for speech-to-text and translation
+Dec 2023 - Jan 2024
+• implemented a React-based web application for high-accuracy speech-to-text conversion with integrated
+multi-language translation using modern APIs.
+• Integrated multi-language translation features to convert text into various languages.
+• Optimized real-time translation for seamless user experience and global accessibility.
+Live Link: Speech Translator GitHub: Code
+
+Technical Skills
+Languages: C, C++, SQL, JavaScript, HTML, CSS.
+Frameworks/Libraries: Express.js, Node.js, ReactJS.
+Developer Tools: Git, Github, Google Cloud Platform, VS Code.
+Libraries: pandas, NumPy, Opencv, Mediapipe.
+Soft skills and Areas of Interest : Problem Solving, Interpersonal Skills.
+Database: MySQL.
+
+Scholastic Achievements
+Solved: 800+ problems combinely on Leetcode and GFG.
+Leetcode: Link
+GFG: Link
+
+Relevant Coursework
+Computer Science: Data structures and algorithms, Object-Oriented programming, Database management system,
+operating system, computer networks.
+
+

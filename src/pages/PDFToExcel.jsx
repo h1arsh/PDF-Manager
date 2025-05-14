@@ -53,6 +53,23 @@ const PDFToExcel = () => {
       // });
       // const result = await response.blob();
       // Create download link for the Excel file
+      const response = await fetch('http://localhost:5000/api/pdf/convert-to-excel', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error('Conversion failed');
+
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = `converted.${selectedFormat}`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(downloadUrl);
+
 
     } catch (error) {
       console.error('Error:', error);

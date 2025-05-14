@@ -1,37 +1,41 @@
 const fs = require('fs');
 const path = require('path');
-const { Document, Packer, Paragraph } = require('docx');
 const pdfParse = require('pdf-parse');
+const { Document, Packer, Paragraph } = require('docx');
 
-const pdfToWord = async (req, res) => {
-  if (!req.file) return res.status(400).send('No file uploaded');
-
+const convertPdfToWord = async (req, res) => {
   try {
-    const dataBuffer = fs.readFileSync(req.file.path);
-    const data = await pdfParse(dataBuffer);
+    if (!req.file) {
+      return res.status(400).send('No file uploaded');
+    }
 
-    const paragraphs = data.text
-      .split('\n')
-      .map(line => new Paragraph(line.trim()))
-      .filter(p => p.root.length > 0);
+    const filePath = req.file.path;
+    const dataBuffer = fs.readFileSync(filePath);
+    const pdfData = await pdfParse(dataBuffer);
 
-    const doc = new Document({ sections: [{ properties: {}, children: paragraphs }] });
+    const text = pdfData.text || 'No text found in the PDF';
+
+    // Create Word Document
+    const doc = new Document({
+      sections: [
+        {
+          children: text.split('\n').map(line => new Paragraph(line)),
+        },
+      ],
+    });
+
     const buffer = await Packer.toBuffer(doc);
 
-    const outputPath = path.join(__dirname, '../temp', `${Date.now()}.docx`);
-    fs.writeFileSync(outputPath, buffer);
-
     // Clean up uploaded PDF
-    fs.unlinkSync(req.file.path);
+    fs.unlinkSync(filePath);
 
-    res.download(outputPath, 'converted.docx', (err) => {
-      if (err) console.error('Download error:', err);
-      fs.unlinkSync(outputPath); // Clean up after sending
-    });
-  } catch (error) {
-    console.error('PDF to Word Error:', error);
+    res.setHeader('Content-Disposition', 'attachment; filename=converted.docx');
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    res.send(buffer);
+  } catch (err) {
+    console.error('Error converting PDF to Word:', err);
     res.status(500).send('Failed to convert PDF to Word');
   }
 };
 
-module.exports = {pdfToWord};
+module.exports = { convertPdfToWord };

@@ -8,6 +8,11 @@ const { rotatePdf } = require('../controllers/rotatePdfController');
 const { splitPdf } = require('../controllers/splitPdfController');
 const { mergePdfs } = require('../controllers/mergePdfController');
 const { convertPdfToWord } = require('../controllers/pdfToWordController');
+const { convertPdfToExcel } = require('../controllers/pdfToExcelController');
+const { convertPdfToPpt } = require('../controllers/pdfToPptController');
+const { convertPdfToJpgController } = require('../controllers/pdfToJpgController');
+const { convertPdfToPng } = require('../controllers/pdfToPngController');
+const { convertPdfToJson } = require('../controllers/pdfToJsonController');
 
 
 // Existing routes
@@ -28,5 +33,19 @@ router.post('/merge', uploadPdf.array('files'), mergePdfs);
 
 // PDF to Word Route
 router.post('/convert-to-word', uploadPdf.single('file'), convertPdfToWord);
+
+// PDF to Excel Route
+router.post('/convert-to-excel', uploadPdf.array('files'), convertPdfToExcel);
+
+// PDF to Excel Route
+router.post('/convert-to-ppt', uploadPdf.array('files'), convertPdfToPpt);
+
+// PDF to JPG Route
+// Change from single file to multiple files
+router.post('/convert-to-jpg', uploadPdf.array('files'), convertPdfToJpgController);
+
+router.post('/convert-to-png', uploadPdf.single('file'), convertPdfToPng);
+
+router.post('/convert-to-json', uploadPdf.array('files'), convertPdfToJson);
 
 module.exports = router;

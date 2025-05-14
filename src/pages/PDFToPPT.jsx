@@ -14,38 +14,56 @@ const PDFToPPT = () => {
     }
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (pdfFiles.length === 0) return;
-    
-    setIsProcessing(true);
-    
-    try {
-      const formData = new FormData();
-      pdfFiles.forEach(file => {
-        formData.append('files', file);
-      });
-
-      // This would be your API call in a real implementation
-      console.log('Submitting PDFs for PPT conversion:', pdfFiles);
-      
-      // Simulate API processing delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // In a real app, you would handle the response and provide download
-      // const response = await fetch('/ppt-convert', {
-      //   method: 'POST',
-      //   body: formData
-      // });
-      // const result = await response.blob();
-      // Create download link for the PPT file
-
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsProcessing(false);
-    }
+  const removeFile = (index) => {
+    setPdfFiles(prevFiles => prevFiles.filter((_, i) => i !== index));
   };
+
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (pdfFiles.length === 0) return;
+
+  setIsProcessing(true);
+
+  try {
+    const formData = new FormData();
+    pdfFiles.forEach(file => {
+      formData.append('files', file);
+    });
+
+    const response = await fetch('http://localhost:5000/api/pdf/convert-to-ppt', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Conversion failed');
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'converted.pptx');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Failed to convert PDF to PPT.');
+  } finally {
+    setIsProcessing(false);
+  }
+};
+
 
   return (
     <>
@@ -91,12 +109,39 @@ const PDFToPPT = () => {
               >
                 Select PDF Files
               </button>
-              {pdfFiles.length > 0 && (
-                <p className="mt-4 text-sm font-medium text-gray-900">
-                  Selected files: {pdfFiles.length}
-                </p>
-              )}
+              
             </div>
+            {/* Uploaded files list */}
+            {pdfFiles.length > 0 && (
+              <div className="mt-6 space-y-3">
+                <h4 className="text-sm font-medium text-gray-700">Selected files:</h4>
+                <ul className="divide-y divide-gray-200 border border-gray-200 rounded-lg">
+                  {pdfFiles.map((file, index) => (
+                    <li key={index} className="flex items-center justify-between p-3 hover:bg-gray-50">
+                      <div className="flex items-center min-w-0">
+                        <svg className="flex-shrink-0 h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        <div className="ml-3 overflow-hidden">
+                          <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
+                          <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeFile(index)}
+                        className="text-gray-400 hover:text-red-500 transition-colors"
+                        aria-label="Remove file"
+                      >
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <div className="mt-8 flex justify-center">
               <button 
