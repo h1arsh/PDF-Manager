@@ -17,6 +17,7 @@
     "child_process": "^1.0.2",
     "cors": "^2.8.5",
     "docx": "^9.5.0",
+    "dotenv": "^16.5.0",
     "excel4node": "^1.8.2",
     "exceljs": "^4.4.0",
     "express": "^5.1.0",
@@ -39,6 +40,7 @@
     "pdf2table": "^0.0.2",
     "pdfjs-dist": "^5.1.91",
     "pptxgenjs": "^4.0.0",
+    "qpdf": "^0.1.0-prealpha.1",
     "sharp": "^0.34.1",
     "uuid": "^11.1.0"
   },

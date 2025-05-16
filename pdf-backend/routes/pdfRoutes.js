@@ -13,6 +13,10 @@ const { convertPdfToPpt } = require('../controllers/pdfToPptController');
 const { convertPdfToJpgController } = require('../controllers/pdfToJpgController');
 const { convertPdfToPng } = require('../controllers/pdfToPngController');
 const { convertPdfToJson } = require('../controllers/pdfToJsonController');
+const { compressPdf } = require('../controllers/compressPdfController');
+const { convertPdfToTiff } = require('../controllers/pdfToTiffController');
+const { convertPdfToTxt } = require('../controllers/pdfToTxtController');
+// const { encryptPdf } = require('../controllers/pdfEncryptController');
 
 
 // Existing routes
@@ -47,5 +51,14 @@ router.post('/convert-to-jpg', uploadPdf.array('files'), convertPdfToJpgControll
 router.post('/convert-to-png', uploadPdf.single('file'), convertPdfToPng);
 
 router.post('/convert-to-json', uploadPdf.array('files'), convertPdfToJson);
+
+router.post('/convert-to-tiff', uploadPdf.single('file'), convertPdfToTiff);
+
+router.post('/convert-to-txt', uploadPdf.single('pdf'), convertPdfToTxt);
+
+// router.post('/encrypt', uploadPdf.single('pdfFile'), encryptPdf);
+
+router.post('/compress', uploadPdf.single('pdfFile'), compressPdf);
+
 
 module.exports = router;

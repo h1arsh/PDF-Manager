@@ -17,35 +17,39 @@ const PDFToTXT = () => {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!pdfFile) return;
-    
-    setIsProcessing(true);
-    
-    try {
-      const formData = new FormData();
-      formData.append('pdf', pdfFile);
+  e.preventDefault();
+  if (!pdfFile) return;
 
-      // This would be your API call in a real implementation
-      console.log('Submitting PDF for TXT conversion:', fileName);
-      
-      // Simulate API processing delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // In a real app, you would handle the response and provide download
-      // const response = await fetch('/convert-pdf-to-txt', {
-      //   method: 'POST',
-      //   body: formData
-      // });
-      // const result = await response.blob();
-      // Create download link for the TXT file
+  setIsProcessing(true);
 
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsProcessing(false);
-    }
-  };
+  try {
+    const formData = new FormData();
+    formData.append('pdf', pdfFile);
+
+    const response = await fetch('http://localhost:5000/api/pdf/convert-to-txt', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) throw new Error('Conversion failed');
+
+    const blob = await response.blob();
+    const downloadUrl = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = fileName.replace(/\.pdf$/i, '.txt');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(downloadUrl);
+  } catch (error) {
+    console.error('Error during PDF to TXT conversion:', error);
+    alert('Failed to convert PDF to TXT. Please try again.');
+  } finally {
+    setIsProcessing(false);
+  }
+};
+
 
   return (
     <>
