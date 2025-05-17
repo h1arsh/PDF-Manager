@@ -47,14 +47,14 @@ const compressWithGhostscript = async (inputPath, outputPath, level) => {
 
   switch (level) {
     case 'high':    // smallest file, lowest quality
-      resolution = 34;
+      resolution = 150;
       break;
     case 'medium':  // decent quality
-      resolution = 70;
+      resolution = 210;
       break;
     case 'low':     // best quality, least compression
     default:
-      resolution = 100;
+      resolution = 240;
       break;
   }
 

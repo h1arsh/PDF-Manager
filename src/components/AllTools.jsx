@@ -176,6 +176,18 @@ const toolCategories = [
         // Add all other converting tools
       ]
     },
+    {
+      title: "AI Tools",
+      tools: [
+        {
+          title: "Summarize PDF ",
+          description: "Summarize the content of your PDF",
+          icon: "bx bxs-file-pdf",
+          href: "/summarize-pdf"
+        },
+        // Add all other converting tools
+      ]
+    },
     // Add other categories
   ];
 

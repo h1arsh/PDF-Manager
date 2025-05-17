@@ -48,6 +48,12 @@ const Footer = () => {
         { name: "Protect PDF", href: "/add-password" },
       ]
     },
+    {
+      title: "AI Tools",
+      links: [
+        { name: "Summarize PDF", href: "/summarize-pdf" },
+      ]
+    },
   ];
 
   return (

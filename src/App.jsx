@@ -29,6 +29,7 @@ import TIFFToPDF from './pages/TiffToPDF';
 import AddPassword from './pages/AddPassword';
 import UnlockPDF from './pages/UnlockPDF';
 import MergePDF from './pages/MergePDF';
+import Summarizer from './pages/AI_Summarizer';
 
 // Scroll restoration component
 const ScrollToTop = () => {
@@ -81,6 +82,7 @@ function App() {
           <Route path="/add-password" element={<AddPassword />} />
           <Route path="/unlock-pdf" element={<UnlockPDF/>} />
           <Route path="/merge-pdf" element={<MergePDF/>} />
+          <Route path="/summarize-pdf" element={<Summarizer/>} />
         </Routes>
         <AllTools />
         <Footer />
