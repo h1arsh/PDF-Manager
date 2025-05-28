@@ -9,27 +9,27 @@ const MainContent = () => {
   }, []);
   
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <div className="text-center">
         <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-            PDF Verse
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-500">
+            ArcPDF
           </span>
         </h1>
-        <p className="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">
+        <p className="mt-3 text-xl text-black max-w-2xl mx-auto">
           Combine multiple files into a single PDF quickly and easily
         </p>
       </div>
 
       {/* File Upload Area */}
-      <div className="mt-12 max-w-3xl mx-auto">
-        <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors">
+      <div className=" mt-12 max-w-3xl mx-auto">
+        <div className="bg-white border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors">
           <div className="flex justify-center mb-4">
             <i className="bx bxs-cloud-upload text-5xl text-blue-500"></i>
           </div>
           <h3 className="text-lg font-medium text-gray-900">Drag and drop your files here</h3>
           <p className="mt-1 text-sm text-gray-500">or click to browse files</p>
-          <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors">
+          <button className="mt-6 bg-blue-600 hover:bg-blue-800 text-white font-medium py-2 px-6 rounded-lg transition-colors">
             Select Files
           </button>
         </div>

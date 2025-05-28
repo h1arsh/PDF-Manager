@@ -68,7 +68,7 @@ const SplitPDF = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <Helmet>
           <title>PDF Verse - Split PDF Online</title>
           <meta name="description" content="Split and Extract PDF information into multiple files" />
@@ -90,7 +90,7 @@ const SplitPDF = () => {
             {/* File Upload Area */}
             <div 
               {...getRootProps()} 
-              className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+              className="bg-white border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
             >
               <input {...getInputProps()} />
               <div className="flex justify-center mb-4">

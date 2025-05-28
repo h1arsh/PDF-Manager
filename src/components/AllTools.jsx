@@ -96,12 +96,6 @@ const toolCategories = [
           href: "/pdf-to-json"
         },
         {
-          title: "PDF to TIFF Convert",
-          description: "Convert PDF to TIFF in seconds ans with ease",
-          icon: "bx bxs-file-pdf",
-          href: "/pdf-to-tiff"
-        },
-        {
           title: "PDF to Text Convert",
           description: "Convert PDF to Text in seconds ans with ease",
           icon: "bx bxs-file-pdf",
@@ -142,12 +136,6 @@ const toolCategories = [
           description: "Transform JPG to PNG quickly with our free tool.",
           icon: "bx bxs-file-pdf",
           href: "/png-to-pdf"
-        },
-        {
-          title: "TIFF to PDF Convert ",
-          description: "Convert TIFF to PDF in seconds ans with ease",
-          icon: "bx bxs-file-pdf",
-          href: "/tiff-to-pdf"
         },
         {
           title: "Text To PDF Convert ",
@@ -194,93 +182,119 @@ const toolCategories = [
 // Array of different color classes for hover effects
 const colorClasses = [
   {
-    shadow: 'hover:shadow-red-500/50',
-    text: 'group-hover:text-red-600',
-    icon: 'text-red-500'
+    bg: 'from-red-100 to-red-50',
+    shadow: 'hover:shadow-red-200',
+    text: 'group-hover:text-red-800',
+    icon: 'text-red-500',
+    border: 'border-red-200'
   },
   {
-    shadow: 'hover:shadow-blue-500/50',
-    text: 'group-hover:text-blue-600',
-    icon: 'text-blue-500'
+    bg: 'from-blue-100 to-blue-50',
+    shadow: 'hover:shadow-blue-200',
+    text: 'group-hover:text-blue-800',
+    icon: 'text-blue-500',
+    border: 'border-blue-200'
   },
   {
-    shadow: 'hover:shadow-green-500/50',
-    text: 'group-hover:text-green-600',
-    icon: 'text-green-500'
+    bg: 'from-green-100 to-green-50',
+    shadow: 'hover:shadow-green-200',
+    text: 'group-hover:text-green-800',
+    icon: 'text-green-500',
+    border: 'border-green-200'
   },
   {
-    shadow: 'hover:shadow-yellow-500/50',
-    text: 'group-hover:text-yellow-600',
-    icon: 'text-yellow-500'
+    bg: 'from-amber-100 to-amber-50',
+    shadow: 'hover:shadow-amber-200',
+    text: 'group-hover:text-amber-800',
+    icon: 'text-amber-500',
+    border: 'border-amber-200'
   },
   {
-    shadow: 'hover:shadow-purple-500/50',
-    text: 'group-hover:text-purple-600',
-    icon: 'text-purple-500'
+    bg: 'from-purple-100 to-purple-50',
+    shadow: 'hover:shadow-purple-200',
+    text: 'group-hover:text-purple-800',
+    icon: 'text-purple-500',
+    border: 'border-purple-200'
   },
   {
-    shadow: 'hover:shadow-pink-500/50',
-    text: 'group-hover:text-pink-600',
-    icon: 'text-pink-500'
+    bg: 'from-pink-100 to-pink-50',
+    shadow: 'hover:shadow-pink-200',
+    text: 'group-hover:text-pink-800',
+    icon: 'text-pink-500',
+    border: 'border-pink-200'
   },
   {
-    shadow: 'hover:shadow-indigo-500/50',
-    text: 'group-hover:text-indigo-600',
-    icon: 'text-indigo-500'
+    bg: 'from-indigo-100 to-indigo-50',
+    shadow: 'hover:shadow-indigo-200',
+    text: 'group-hover:text-indigo-800',
+    icon: 'text-indigo-500',
+    border: 'border-indigo-200'
   },
   {
-    shadow: 'hover:shadow-orange-500/50',
-    text: 'group-hover:text-orange-600',
-    icon: 'text-orange-500'
+    bg: 'from-orange-100 to-orange-50',
+    shadow: 'hover:shadow-orange-200',
+    text: 'group-hover:text-orange-800',
+    icon: 'text-orange-500',
+    border: 'border-orange-200'
   },
   {
-    shadow: 'hover:shadow-teal-500/50',
-    text: 'group-hover:text-teal-600',
-    icon: 'text-teal-500'
+    bg: 'from-teal-100 to-teal-50',
+    shadow: 'hover:shadow-teal-200',
+    text: 'group-hover:text-teal-800',
+    icon: 'text-teal-500',
+    border: 'border-teal-200'
   },
 ];
 
+
 const AllTools = () => {
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="bg-gradient-to-b from-cyan-200 to-blue-200 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            One platform, <span className="text-blue-600">multiple tools</span>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl sm:font-extrabold">
+            One platform, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">multiple tools</span>
           </h2>
-          <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500">
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-600 font-medium">
             All the PDF tools you need, in one place
           </p>
         </div>
 
         {toolCategories.map((category, index) => (
           <div key={index} className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8 pb-2 border-b border-gray-200">
-              {category.title}
-            </h3>
+            <div className="flex items-center mb-6 pb-2 border-b border-gray-200">
+              <i className={`${category.icon} text-2xl mr-3 text-blue-500`}></i>
+              <h3 className="text-2xl font-semibold text-gray-800">
+                {category.title}
+              </h3>
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {category.tools.map((tool, toolIndex) => {
                 const colorIndex = toolIndex % colorClasses.length;
-                const { shadow, text, icon } = colorClasses[colorIndex];
+                const { bg, shadow, text, icon, border } = colorClasses[colorIndex];
                 
                 return (
                   <Link 
                     key={toolIndex} 
                     to={tool.href}
-                    className={`group block bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow ${shadow}`}
+                    className={`group block bg-white/90 backdrop-blur-sm rounded-xl border ${border} overflow-hidden hover:shadow-lg transition-all duration-300 ${shadow} hover:-translate-y-1`}
                     onClick={scrollToTop}
                   >
-                    <div className="p-6">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                    <div className="relative p-6">
                       <div className="flex items-start">
-                        <div className={`flex-shrink-0 rounded-lg p-3`}>
-                          <i className={`${tool.icon} text-2xl mr-3 ${icon} mt-1 flex-shrink-0`}></i>
+                        <div className={`flex-shrink-0 rounded-lg p-3 bg-white/80 backdrop-blur-sm shadow-sm ${border}`}>
+                          <i className={`${tool.icon} text-2xl ${icon}`}></i>
                         </div>
                         <div className="ml-4">
-                          <h4 className={`text-lg font-medium text-gray-900 ${text} transition-colors`}>
+                          <h4 className={`text-lg font-semibold text-gray-800 ${text} transition-colors duration-300`}>
                             {tool.title}
-                            <i className={`fas fa-chevron-right ml-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity ${icon}`}></i>
+                            <i className={`fas fa-arrow-right ml-2 text-xs opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all duration-300 ${icon}`}></i>
                           </h4>
-                          <p className="mt-1 text-sm text-gray-500">{tool.description}</p>
+                          <p className="mt-1 text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 font-medium">
+                            {tool.description}
+                          </p>
                         </div>
                       </div>
                     </div>

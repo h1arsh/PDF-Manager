@@ -10,7 +10,6 @@ import DeletePDFPages from './pages/Delete';
 import PDFToJPG from './pages/PDFToJPG';
 import PDFToJSON from './pages/PDFToJSON';
 import PDFToPNG from './pages/PDFToPNG';
-import PDFToTIFF from './pages/PDFToTIFF';
 import PDFToTXT from './pages/PDFToTXT';
 import PDFToWord from './pages/PDFToWORD';
 import EditPDF from './pages/EditPDF';
@@ -25,11 +24,11 @@ import PPTToPDF from './pages/PPTToPDF';
 import JPGToPDF from './pages/JPGToPDF';
 import PNGToPDF from './pages/PNGToPDF';
 import TextToPDF from './pages/TextToPDF';
-import TIFFToPDF from './pages/TiffToPDF';
 import AddPassword from './pages/AddPassword';
 import UnlockPDF from './pages/UnlockPDF';
 import MergePDF from './pages/MergePDF';
 import Summarizer from './pages/AI_Summarizer';
+import Editor from './pages/Editor'
 
 // Scroll restoration component
 const ScrollToTop = () => {
@@ -48,7 +47,7 @@ const ScrollToTop = () => {
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-grey-100">
         <ScrollToTop />
         <Navbar />
         <Routes>
@@ -63,7 +62,6 @@ function App() {
           <Route path="/pdf-to-jpg" element={<PDFToJPG />} />
           <Route path="/pdf-to-json" element={<PDFToJSON />} />
           <Route path="/pdf-to-png" element={<PDFToPNG />} />
-          <Route path="/pdf-to-tiff" element={<PDFToTIFF />} />
           <Route path="/pdf-to-txt" element={<PDFToTXT />} />
           <Route path="/pdf-to-word" element={<PDFToWord />} />
           <Route path="/edit-pdf" element={<EditPDF />} />
@@ -78,11 +76,11 @@ function App() {
           <Route path="/jpg-to-pdf" element={<JPGToPDF />} />
           <Route path="/png-to-pdf" element={<PNGToPDF />} />
           <Route path="/text-to-pdf" element={<TextToPDF />} />
-          <Route path="/tiff-to-pdf" element={<TIFFToPDF />} />
           <Route path="/add-password" element={<AddPassword />} />
           <Route path="/unlock-pdf" element={<UnlockPDF/>} />
           <Route path="/merge-pdf" element={<MergePDF/>} />
           <Route path="/summarize-pdf" element={<Summarizer/>} />
+          <Route path="/editor" element={<Editor/>} />
         </Routes>
         <AllTools />
         <Footer />

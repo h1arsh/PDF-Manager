@@ -8,15 +8,9 @@ const AddPassword = () => {
   const [fileName, setFileName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [encryptionLevel, setEncryptionLevel] = useState('128-bit');
-  const [permissions, setPermissions] = useState({
-    printing: 'low',
-    modifying: false,
-    copying: false,
-    annotating: true
-  });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: '.pdf',
@@ -28,11 +22,9 @@ const AddPassword = () => {
     }
   });
 
-  const handlePermissionChange = (permission) => {
-    setPermissions(prev => ({
-      ...prev,
-      [permission]: !prev[permission]
-    }));
+  const validatePassword = (pw) => {
+    const strongRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    return strongRegex.test(pw);
   };
 
   const handleSubmit = async (e) => {
@@ -51,42 +43,53 @@ const AddPassword = () => {
       setError('Passwords do not match');
       return;
     }
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters');
+    if (!validatePassword(password)) {
+      setError('Password must contain at least 8 characters including uppercase, lowercase and numbers');
       return;
     }
     
     setIsProcessing(true);
     setError('');
+    setSuccess('');
     
     try {
       const formData = new FormData();
       formData.append('pdfFile', pdfFile);
       formData.append('password', password);
-      formData.append('encryptionLevel', encryptionLevel);
-      formData.append('permissions', JSON.stringify(permissions));
 
-      // This would be your API call in a real implementation
-      console.log('Encrypting PDF with:', {
-        fileName,
-        encryptionLevel,
-        permissions
+      const response = await fetch('http://localhost:5000/api/pdf/encrypt-pdf', {
+        method: 'POST',
+        body: formData,
       });
-      
-      // Simulate API processing delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // In a real app, you would handle the response and provide download
-      // const response = await fetch('/encrypt-pdf', {
-      //   method: 'POST',
-      //   body: formData
-      // });
-      // const result = await response.blob();
-      // Create download link for the encrypted PDF
 
+      // Handle PDF response
+      if (response.ok) {
+        const blob = await response.blob();
+        
+        // Verify it's a PDF
+        if (blob.type !== 'application/pdf') {
+          throw new Error('Server returned invalid file type');
+        }
+        
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName.replace('.pdf', '_protected.pdf');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+        
+        setSuccess('PDF encrypted and downloaded successfully!');
+      } else {
+        // Handle error response
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Encryption failed');
+      }
     } catch (error) {
       console.error('Error:', error);
-      setError('An error occurred during encryption');
+      setError(error.message || 'An error occurred during encryption');
     } finally {
       setIsProcessing(false);
     }
@@ -94,29 +97,30 @@ const AddPassword = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="bg-gradient-to-t from-cyan-200 to-blue-200 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <Helmet>
-          <title>PDF Verse - Encrypt PDF Files</title>
-          <meta name="description" content="Add password protection and encryption to your PDF files to secure sensitive documents" />
+          <title>PDF Verse - Password Protect PDF</title>
+          <meta name="description" content="Add password protection to your PDF files to secure sensitive documents" />
         </Helmet>
         
         <div className="text-center">
           <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-              Encrypt PDF Files
+              Password Protect PDF
             </span>
           </h1>
           <h5 className="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">
-            Add password protection and encryption to secure your sensitive PDF documents.
+            Add password protection to secure your sensitive PDF documents.
           </h5>
         </div>
 
         <div className="mt-12 max-w-3xl mx-auto">
           <form onSubmit={handleSubmit}>
+
             {/* File Upload Area */}
             <div 
               {...getRootProps()} 
-              className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer mb-8"
+              className="bg-white border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer mb-8"
             >
               <input {...getInputProps()} />
               <div className="flex justify-center mb-4">
@@ -138,6 +142,22 @@ const AddPassword = () => {
                 </p>
               )}
             </div>
+            
+            {/* Success Message */}
+            {success && (
+              <div className="mb-6 p-4 bg-green-50 border-l-4 border-green-500">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg className="h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm text-green-700">{success}</p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Password Settings */}
             <div className="bg-gray-50 p-6 rounded-lg mb-6">
@@ -176,7 +196,7 @@ const AddPassword = () => {
                       )}
                     </button>
                   </div>
-                  <p className="mt-1 text-xs text-gray-500">Minimum 6 characters</p>
+                  <p className="mt-1 text-xs text-gray-500">Minimum 8 characters with uppercase, lowercase, and numbers</p>
                 </div>
                 
                 <div>
@@ -192,96 +212,6 @@ const AddPassword = () => {
                     placeholder="Confirm password"
                     required
                   />
-                </div>
-              </div>
-            </div>
-
-            {/* Encryption Settings */}
-            <div className="bg-gray-50 p-6 rounded-lg mb-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Encryption Settings</h3>
-              
-              <div className="mb-4">
-                <label htmlFor="encryptionLevel" className="block text-sm font-medium text-gray-700 mb-2">
-                  Encryption Strength:
-                </label>
-                <select
-                  id="encryptionLevel"
-                  value={encryptionLevel}
-                  onChange={(e) => setEncryptionLevel(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="40-bit">40-bit (Basic)</option>
-                  <option value="128-bit">128-bit (Standard)</option>
-                  <option value="256-bit">256-bit (High Security)</option>
-                </select>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Document Permissions:
-                </label>
-                <div className="space-y-2">
-                  <div className="flex items-center">
-                    <input
-                      id="printing"
-                      type="checkbox"
-                      checked={permissions.printing}
-                      onChange={() => handlePermissionChange('printing')}
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    />
-                    <label htmlFor="printing" className="ml-2 block text-sm text-gray-700">
-                      Allow Printing
-                    </label>
-                    {permissions.printing && (
-                      <select
-                        value={permissions.printing}
-                        onChange={(e) => setPermissions({...permissions, printing: e.target.value})}
-                        className="ml-2 px-2 py-1 border border-gray-300 rounded text-sm"
-                      >
-                        <option value="low">Low quality</option>
-                        <option value="high">High quality</option>
-                      </select>
-                    )}
-                  </div>
-                  
-                  <div className="flex items-center">
-                    <input
-                      id="modifying"
-                      type="checkbox"
-                      checked={permissions.modifying}
-                      onChange={() => handlePermissionChange('modifying')}
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    />
-                    <label htmlFor="modifying" className="ml-2 block text-sm text-gray-700">
-                      Allow Document Modification
-                    </label>
-                  </div>
-                  
-                  <div className="flex items-center">
-                    <input
-                      id="copying"
-                      type="checkbox"
-                      checked={permissions.copying}
-                      onChange={() => handlePermissionChange('copying')}
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    />
-                    <label htmlFor="copying" className="ml-2 block text-sm text-gray-700">
-                      Allow Content Copying
-                    </label>
-                  </div>
-                  
-                  <div className="flex items-center">
-                    <input
-                      id="annotating"
-                      type="checkbox"
-                      checked={permissions.annotating}
-                      onChange={() => handlePermissionChange('annotating')}
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    />
-                    <label htmlFor="annotating" className="ml-2 block text-sm text-gray-700">
-                      Allow Comments and Form Fill
-                    </label>
-                  </div>
                 </div>
               </div>
             </div>
@@ -316,7 +246,7 @@ const AddPassword = () => {
                     Encrypting PDF...
                   </span>
                 ) : (
-                  'Encrypt PDF'
+                  'Password Protect PDF'
                 )}
               </button>
             </div>

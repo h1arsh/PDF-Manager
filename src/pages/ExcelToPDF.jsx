@@ -20,35 +20,43 @@ const ExcelToPDF = () => {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!excelFile) return;
-    
-    setIsProcessing(true);
-    
-    try {
-      const formData = new FormData();
-      formData.append('excelFile', excelFile);
+  e.preventDefault();
+  if (!excelFile) return;
+  
+  setIsProcessing(true);
+  
+  try {
+    const formData = new FormData();
+    formData.append('excelFile', excelFile);
 
-      // This would be your API call in a real implementation
-      console.log('Submitting Excel file for conversion:', fileName);
-      
-      // Simulate API processing delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // In a real app, you would handle the response and provide download
-      // const response = await fetch('/excel-to-pdf', {
-      //   method: 'POST',
-      //   body: formData
-      // });
-      // const result = await response.blob();
-      // Create download link for the converted PDF
+    const response = await fetch('http://localhost:5000/api/pdf/convert-excel-to-pdf', {
+      method: 'POST',
+      body: formData
+    });
 
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsProcessing(false);
+    if (!response.ok) {
+      throw new Error(await response.text());
     }
-  };
+
+    // Create download link for the converted PDF
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName.replace(/\.(xlsx|xls)$/i, '.pdf');
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert(`Conversion failed: ${error.message}`);
+  } finally {
+    setIsProcessing(false);
+  }
+};
+
 
   return (
     <>

@@ -59,7 +59,7 @@ const AddPageNumber = () => {
 };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <Helmet>
         <title>PDF Verse - Add Page Numbers to PDF</title>
       </Helmet>
@@ -70,7 +70,7 @@ const AddPageNumber = () => {
             Add Page Numbers to PDF
           </span>
         </h1>
-        <p className="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">
+        <p className="mt-3 text-xl text-black max-w-2xl mx-auto">
           Add page numbers into PDFs with ease. Choose your positions, dimensions, typography.
         </p>
       </div>
@@ -80,7 +80,7 @@ const AddPageNumber = () => {
           {/* File Upload Area */}
           <div 
             {...getRootProps()} 
-            className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+            className="bg-white border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
           >
             <input {...getInputProps()} />
             <div className="flex justify-center mb-4">
@@ -90,7 +90,7 @@ const AddPageNumber = () => {
             <p className="mt-1 text-sm text-gray-500">or click to browse files</p>
             <button 
               type="button"
-              className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+              className="mt-6 bg-blue-600 hover:bg-blue-800 text-white font-medium py-2 px-6 rounded-lg transition-colors"
             >
               Select PDF
             </button>

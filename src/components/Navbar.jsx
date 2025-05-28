@@ -152,12 +152,6 @@ const Navbar = () => {
           href: "/pdf-to-json"
         },
         {
-          title: "PDF to TIFF Convert",
-          description: "Convert PDF to TIFF in seconds ans with ease",
-          icon: "bx bxs-file-pdf",
-          href: "/pdf-to-tiff"
-        },
-        {
           title: "PDF to Text Convert",
           description: "Convert PDF to Text in seconds ans with ease",
           icon: "bx bxs-file-pdf",
@@ -198,12 +192,6 @@ const Navbar = () => {
           description: "Transform JPG to PNG quickly with our free tool.",
           icon: "bx bxs-file-pdf",
           href: "/png-to-pdf"
-        },
-        {
-          title: "TIFF to PDF Convert ",
-          description: "Convert TIFF to PDF in seconds ans with ease",
-          icon: "bx bxs-file-pdf",
-          href: "/tiff-to-pdf"
         },
         {
           title: "Text To PDF Convert ",
@@ -252,10 +240,10 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
-          <a href="/" className="flex items-center">
+          <a href="/" className="flex items-center mr-auto">  
             <img 
-              src="https://i.ibb.co/8mT8MT1/pdf-verse-removebg-preview.png" 
-              className="h-40 w-auto" 
+              src="./images/ArcPDF.png" 
+              className="w-40"  
               alt="PDF Verse Logo"
             />
           </a>
@@ -287,15 +275,15 @@ const Navbar = () => {
                   <div className="grid grid-cols-3 divide-x divide-gray-100">
                     {/* Left Section - About */}
                     <div className="p-6 bg-gray-50">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">About PDF Verse</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">About ArcPDF</h3>
                       <p className="text-gray-600 text-sm mb-4">
-                        PDF Verse is an easy-to-use web-based PDF editing tool that allows users to merge, split, compress, and convert PDFs into various formats.
+                        ArcPDF is an easy-to-use web-based PDF editing tool that allows users to merge, split, compress, and convert PDFs into various formats.
                       </p>
                       
                     </div>
                     
                     {/* Right Section - Tools */}
-                    <div className="col-span-2 p-6 overflow-y-auto max-h-[70vh]">
+                    <div className="bg-gradient-to-t from-green-300 to-cyan-200 col-span-2 p-6 overflow-y-auto max-h-[70vh]">
                       {toolCategories.map((category, index) => (
                         <div key={index} className="mb-8">
                           <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">

@@ -46,7 +46,7 @@ const MergePDF = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <div className="text-center">
         <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
@@ -61,7 +61,7 @@ const MergePDF = () => {
       <div className="mt-12 max-w-3xl mx-auto">
         <div
           {...getRootProps()}
-          className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+          className="bg-white border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
         >
           <input {...getInputProps()} />
           <div className="flex justify-center mb-4">
@@ -87,7 +87,7 @@ const MergePDF = () => {
 
         <div className="mt-8 flex justify-center">
           <button
-            className="bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white font-medium py-3 px-8 rounded-lg shadow-md transition-all transform hover:scale-105 disabled:opacity-50"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-10 rounded-lg transition-colors text-lg"
             onClick={handleMerge}
             disabled={files.length < 2}
           >
