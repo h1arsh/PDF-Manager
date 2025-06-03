@@ -73,7 +73,7 @@ const WatermarkPDF = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24" style={{ width: '90%' }}>
+      <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <Helmet>
           <title>PDF Verse - Watermark PDF Online</title>
           <meta name="description" content="Stamp text or image over your PDF with custom options" />
@@ -87,7 +87,7 @@ const WatermarkPDF = () => {
                 Text Watermark PDF
               </span>
             </h1>
-            <h5 className="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">
+            <h5 className="mt-3 text-xl text-gray-700 max-w-2xl mx-auto">
               Stamp text over your PDF. Choose the typography, transparency and position
             </h5>
           </div>
@@ -96,7 +96,7 @@ const WatermarkPDF = () => {
             <form onSubmit={handleTextWatermarkSubmit}>
               <div 
                 {...getTextPdfRootProps()} 
-                className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+                className="bg-yellow-100 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
               >
                 <input {...getTextPdfInputProps()} />
                 <div className="flex justify-center mb-4">
@@ -109,7 +109,7 @@ const WatermarkPDF = () => {
                   />
                 </div>
                 <h3 className="text-lg font-medium text-gray-900">Drag and drop your PDFs here</h3>
-                <p className="mt-1 text-sm text-gray-500">or click to browse files (multiple allowed)</p>
+                <p className="mt-1 text-sm text-gray-700">or click to browse files (multiple allowed)</p>
                 <button 
                   type="button"
                   className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
@@ -134,7 +134,7 @@ const WatermarkPDF = () => {
                       id="watermarkText"
                       value={watermarkText}
                       onChange={(e) => setWatermarkText(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                       required
                     />
                   </div>
@@ -149,7 +149,7 @@ const WatermarkPDF = () => {
                       onChange={(e) => setFontSize(e.target.value)}
                       min="1"
                       max="140"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                     />
                   </div>
                 </div>
@@ -162,7 +162,7 @@ const WatermarkPDF = () => {
                       id="fontFamily"
                       value={fontFamily}
                       onChange={(e) => setFontFamily(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="Helvetica">Helvetica</option>
                       <option value="Arial">Arial</option>
@@ -180,7 +180,7 @@ const WatermarkPDF = () => {
                       onChange={(e) => setRotation(e.target.value)}
                       min="-360"
                       max="360"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                       required
                     />
                   </div>
@@ -199,7 +199,7 @@ const WatermarkPDF = () => {
                   min="0"
                   max="1"
                   step="0.1"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  className="bg-yellow-100 w-full h-2 rounded-lg appearance-none cursor-pointer"
                 />
               </div>
 

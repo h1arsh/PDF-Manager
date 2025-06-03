@@ -111,7 +111,7 @@ const TextToPDF = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Helmet>
           <title>PDF Verse - Text to PDF Converter</title>
           <meta name="description" content="Convert plain text to PDF documents with our easy-to-use FREE online converter tool" />
@@ -123,7 +123,7 @@ const TextToPDF = () => {
               Convert Text to PDF
             </span>
           </h1>
-          <h5 className="mt-3 text-lg text-gray-500 max-w-2xl mx-auto">
+          <h5 className="mt-3 text-lg text-gray-700 max-w-2xl mx-auto">
             Upload your text file and convert it to a professional PDF document.
           </h5>
         </div>
@@ -133,7 +133,7 @@ const TextToPDF = () => {
             {/* File Upload Area */}
             <div 
               {...getRootProps()} 
-              className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer ${
+              className={`bg-yellow-100 border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer ${
                 isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-blue-400'
               }`}
             >
@@ -146,7 +146,7 @@ const TextToPDF = () => {
               <h3 className="text-lg font-medium text-gray-900">
                 {isDragActive ? 'Drop your text file here' : 'Drag and drop your text file here'}
               </h3>
-              <p className="mt-1 text-sm text-gray-500">or click to browse files (.txt format, max 5MB)</p>
+              <p className="mt-1 text-sm text-gray-700">or click to browse files (.txt format, max 5MB)</p>
               <button 
                 type="button"
                 className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
@@ -215,7 +215,7 @@ const TextToPDF = () => {
                   id="fileName"
                   value={fileName}
                   onChange={(e) => setFileName(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                   required
                 />
               </div>
@@ -227,7 +227,7 @@ const TextToPDF = () => {
                   id="fontSize"
                   value={fontSize}
                   onChange={(e) => setFontSize(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="10">10pt</option>
                   <option value="12">12pt</option>
@@ -244,7 +244,7 @@ const TextToPDF = () => {
                   id="fontFamily"
                   value={fontFamily}
                   onChange={(e) => setFontFamily(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="Arial">Arial</option>
                   <option value="Times New Roman">Times New Roman</option>
@@ -261,7 +261,7 @@ const TextToPDF = () => {
                   id="pageSize"
                   value={pageSize}
                   onChange={(e) => setPageSize(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="A4">A4</option>
                   <option value="Letter">Letter</option>
@@ -277,7 +277,7 @@ const TextToPDF = () => {
                   id="margin"
                   value={margin}
                   onChange={(e) => setMargin(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="narrow">Narrow</option>
                   <option value="normal">Normal</option>
@@ -289,7 +289,7 @@ const TextToPDF = () => {
             <div className="mt-8 flex justify-center">
               <button 
                 type="submit" 
-                className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-10 rounded-lg transition-colors text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
                 disabled={!file || isProcessing}
               >
                 {isProcessing ? (

@@ -53,7 +53,7 @@ const PDFToTXT = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <Helmet>
           <title>PDF Verse - PDF to TXT Converter</title>
           <meta name="description" content="Effortless PDF-to-Text Conversion: Upload and Transform Your Documents Easily" />
@@ -65,7 +65,7 @@ const PDFToTXT = () => {
               PDF to TXT Convertor
             </span>
           </h1>
-          <h5 className="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">
+          <h5 className="mt-3 text-xl text-gray-700 max-w-2xl mx-auto">
             Effortless PDF-to-Text Conversion: Upload and Transform Your Documents Easily
           </h5>
         </div>
@@ -75,7 +75,7 @@ const PDFToTXT = () => {
             {/* File Upload Area */}
             <div 
               {...getRootProps()} 
-              className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+              className="bg-yellow-100 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
             >
               <input {...getInputProps()} />
               <div className="flex justify-center mb-4">
@@ -84,7 +84,7 @@ const PDFToTXT = () => {
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-gray-900">Drag and drop your PDF here</h3>
-              <p className="mt-1 text-sm text-gray-500">or click to browse files</p>
+              <p className="mt-1 text-sm text-gray-700">or click to browse files</p>
               <button 
                 type="button"
                 className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"

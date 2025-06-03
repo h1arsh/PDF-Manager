@@ -61,14 +61,14 @@ const MergePDF = () => {
       <div className="mt-12 max-w-3xl mx-auto">
         <div
           {...getRootProps()}
-          className="bg-white border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+          className="bg-yellow-100 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
         >
           <input {...getInputProps()} />
           <div className="flex justify-center mb-4">
             <i className="bx bxs-cloud-upload text-5xl text-blue-500"></i>
           </div>
           <h3 className="text-lg font-medium text-gray-900">Drag and drop your files here</h3>
-          <p className="mt-1 text-sm text-gray-500">or click to browse files (PDF only)</p>
+          <p className="mt-1 text-sm text-gray-700">or click to browse files (PDF only)</p>
         </div>
 
         {files.length > 0 && (
