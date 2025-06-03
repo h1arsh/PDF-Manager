@@ -1,0 +1,22 @@
+/* static/style.css */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    line-height: 1.6;
+}
+h1 {
+    text-align: center;
+}
+input[type=file], button {
+    display: block;
+    margin: 1em auto;
+}
+.summary {
+    background-color: #f9f9f9;
+    padding: 1em;
+    border: 1px solid #ddd;
+    white-space: pre-wrap;    /* preserves line breaks and wraps text */
+    word-wrap: break-word;    /* breaks long words if needed */
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PDF Summarizer</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <h1>AI File Summarizer</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <label for="file-upload">Choose a file to summarize (PDF, DOCX, TXT):</label>
+        <input type="file" id="file-upload" name="file" required title="Select a file to upload" />
+        <button type="submit">Summarize</button>
+    </form>
+
+    {% if filename %}
+        <h2>Uploaded: {{ filename }}</h2>
+        <a href="{{ url_for('download', filename=filename) }}">Download Summary</a>
+    {% endif %}
+
+    {% if summary %}
+        <h3>Summary</h3>
+        <div class="summary">{{ summary }}</div>
+    {% endif %}
+
+    {% if history %}
+        <h4>Upload History</h4>
+        <ul>
+            {% for name, _ in history %}
+                <li>{{ name }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
