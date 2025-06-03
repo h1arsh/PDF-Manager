@@ -111,7 +111,7 @@ const JPGToPDF = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Helmet>
           <title>PDF Verse - JPG to PDF Converter</title>
           <meta name="description" content="Convert JPG images to PDF documents with our easy-to-use FREE online converter tool" />
@@ -123,7 +123,7 @@ const JPGToPDF = () => {
               Convert JPG to PDF
             </span>
           </h1>
-          <h5 className="mt-3 text-lg text-gray-500 max-w-2xl mx-auto">
+          <h5 className="mt-3 text-lg text-gray-700 max-w-2xl mx-auto">
             Convert multiple JPG images into a single PDF file with customizable layout options.
           </h5>
         </div>
@@ -133,7 +133,7 @@ const JPGToPDF = () => {
             {/* File Upload Area */}
             <div 
               {...getRootProps()} 
-              className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer ${
+              className={`bg-yellow-100 border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer ${
                 isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-blue-400'
               }`}
             >
@@ -146,7 +146,7 @@ const JPGToPDF = () => {
               <h3 className="text-lg font-medium text-gray-900">
                 {isDragActive ? 'Drop your JPG images here' : 'Drag and drop your JPG images here'}
               </h3>
-              <p className="mt-1 text-sm text-gray-500">or click to browse files (max 20 images, 20MB each)</p>
+              <p className="mt-1 text-sm text-gray-700">or click to browse files (max 20 images, 20MB each)</p>
               <button 
                 type="button"
                 className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
@@ -260,7 +260,7 @@ const JPGToPDF = () => {
                   id="layoutOption"
                   value={layoutOption}
                   onChange={(e) => setLayoutOption(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="portrait">Portrait (8.5 × 11 in)</option>
                   <option value="landscape">Landscape (11 × 8.5 in)</option>
@@ -276,7 +276,7 @@ const JPGToPDF = () => {
                   id="marginSize"
                   value={marginSize}
                   onChange={(e) => setMarginSize(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="small">Small (0.25 in)</option>
                   <option value="medium">Medium (0.5 in)</option>
@@ -289,7 +289,7 @@ const JPGToPDF = () => {
             <div className="mt-8 flex justify-center">
               <button 
                 type="submit" 
-                className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-10 rounded-lg transition-colors text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
                 disabled={imageFiles.length === 0 || isProcessing}
               >
                 {isProcessing ? (

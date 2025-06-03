@@ -78,7 +78,7 @@ const PDFCompressor = () => {
         <meta name="description" content="Compress your PDF files online without losing quality" />
       </Helmet>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center">
           <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
@@ -101,7 +101,7 @@ const PDFCompressor = () => {
             {/* File Upload Area */}
             <div
               {...getRootProps()}
-              className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+              className="bg-yellow-100 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
             >
               <input {...getInputProps()} />
               <div className="flex justify-center mb-4">
@@ -152,11 +152,11 @@ const PDFCompressor = () => {
                 <label htmlFor="compressionLevel" className="block text-sm font-medium text-gray-700 mb-2">
                 Compression Level:
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className=" grid grid-cols-1 md:grid-cols-3 gap-4">
                 {['low', 'medium', 'high'].map((level) => (
                     <div 
                     key={level}
-                    className={`p-4 border rounded-lg cursor-pointer transition-all ${
+                    className={`bg-yellow-100 p-4 border rounded-lg cursor-pointer transition-all ${
                         compressionLevel === level 
                         ? 'border-blue-500 bg-blue-50' 
                         : 'border-gray-300 hover:border-blue-300'
@@ -176,7 +176,7 @@ const PDFCompressor = () => {
                         {level} compression
                         </label>
                     </div>
-                    <p className="mt-1 text-xs text-gray-500">
+                    <p className="mt-1 text-xs text-gray-700">
                         {level === 'low' && 'Smaller size reduction, best quality'}
                         {level === 'medium' && 'Balanced size and quality'}
                         {level === 'high' && 'Maximum compression, reduced quality'}

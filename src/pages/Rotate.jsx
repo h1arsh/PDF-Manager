@@ -80,7 +80,7 @@ const RotatePDF = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <Helmet>
           <title>PDF Verse - Rotate PDF Online</title>
           <meta name="description" content="Rotate your PDF files as you want. Rotate multiple PDFs at same time defining degrees" />
@@ -108,7 +108,7 @@ const RotatePDF = () => {
             {/* File Upload Area */}
             <div 
               {...getRootProps()} 
-              className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+              className="bg-yellow-100 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
             >
               <input {...getInputProps()} />
               <div className="flex justify-center mb-4">
@@ -171,7 +171,7 @@ const RotatePDF = () => {
                 id="rotationDirection"
                 value={rotationDirection}
                 onChange={(e) => setRotationDirection(e.target.value)}
-                className="w-full sm:w-48 px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                className="bg-yellow-100  w-full sm:w-48 px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="left">Left (90° counter-clockwise)</option>
                 <option value="right">Right (90° clockwise)</option>

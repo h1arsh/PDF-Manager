@@ -1,7 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDropzone } from 'react-dropzone';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const PNGToPDF = () => {
@@ -140,7 +139,7 @@ const PNGToPDF = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Helmet>
           <title>PDF Verse - PNG to PDF Converter</title>
           <meta name="description" content="Convert multiple PNG images to a single PDF document with our easy-to-use FREE online converter tool" />
@@ -152,7 +151,7 @@ const PNGToPDF = () => {
               Convert PNG to PDF
             </span>
           </h1>
-          <h5 className="mt-3 text-lg md:text-xl text-gray-500 max-w-2xl mx-auto">
+          <h5 className="mt-3 text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
             Combine multiple images into a single high-quality PDF file
           </h5>
         </div>
@@ -162,7 +161,7 @@ const PNGToPDF = () => {
             {/* File Upload Area */}
             <div 
               {...getRootProps()} 
-              className={`border-2 border-dashed rounded-xl p-8 md:p-12 text-center transition-colors cursor-pointer ${
+              className={`bg-yellow-100 border-2 border-dashed rounded-xl p-8 md:p-12 text-center transition-colors cursor-pointer ${
                 isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-blue-400'
               }`}
             >
@@ -175,7 +174,7 @@ const PNGToPDF = () => {
               <h3 className="text-lg font-medium text-gray-900">
                 {isDragActive ? 'Drop your images here' : 'Drag and drop your images here'}
               </h3>
-              <p className="mt-1 text-sm text-gray-500">Supports PNG, JPG, WEBP (Max 50 files, 10MB each)</p>
+              <p className="mt-1 text-sm text-gray-700">Supports PNG, JPG, WEBP (Max 50 files, 10MB each)</p>
               <button 
                 type="button"
                 className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
@@ -294,7 +293,7 @@ const PNGToPDF = () => {
                   id="fileName"
                   value={fileName}
                   onChange={(e) => setFileName(e.target.value)}
-                  className="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter PDF file name"
                 />
                 <span className="inline-flex items-center px-3 rounded-r-lg border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
@@ -313,7 +312,7 @@ const PNGToPDF = () => {
                   id="layoutOption"
                   value={layoutOption}
                   onChange={(e) => setLayoutOption(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="portrait">Portrait</option>
                   <option value="landscape">Landscape</option>
@@ -328,7 +327,7 @@ const PNGToPDF = () => {
                   id="marginSize"
                   value={marginSize}
                   onChange={(e) => setMarginSize(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="none">None</option>
                   <option value="small">Small (10px)</option>
@@ -344,7 +343,7 @@ const PNGToPDF = () => {
                   id="quality"
                   value={quality}
                   onChange={(e) => setQuality(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="low">Low (72 DPI)</option>
                   <option value="medium">Medium (150 DPI)</option>
@@ -356,7 +355,7 @@ const PNGToPDF = () => {
             <div className="mt-8 flex justify-center">
               <button 
                 type="submit" 
-                className="w-full md:w-auto mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-10 rounded-lg transition-colors text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
                 disabled={imageFiles.length === 0 || isProcessing}
               >
                 {isProcessing ? (

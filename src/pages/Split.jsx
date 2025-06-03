@@ -90,7 +90,7 @@ const SplitPDF = () => {
             {/* File Upload Area */}
             <div 
               {...getRootProps()} 
-              className="bg-white border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+              className="bg-yellow-100 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
             >
               <input {...getInputProps()} />
               <div className="flex justify-center mb-4">
@@ -157,9 +157,9 @@ const SplitPDF = () => {
                 onChange={(e) => setPageRanges(e.target.value)}
                 placeholder="1-3,5-7,9"
                 required
-                className="w-full sm:w-96 px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                className="bg-yellow-100 w-full sm:w-96 px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
               />
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm text-gray-700">
                 Separate ranges with commas. Use hyphen for page ranges.
               </p>
             </div>

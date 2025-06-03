@@ -47,7 +47,7 @@ const PDFSummarizer = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <Helmet>
         <title>PDF Verse - AI PDF Summarizer</title>
       </Helmet>
@@ -58,7 +58,7 @@ const PDFSummarizer = () => {
             AI PDF Summarizer
           </span>
         </h1>
-        <p className="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">
+        <p className="mt-3 text-xl text-gray-700 max-w-2xl mx-auto">
           Upload a PDF and get an AI-generated summary of its contents instantly.
         </p>
       </div>
@@ -68,14 +68,14 @@ const PDFSummarizer = () => {
           {/* File Upload */}
           <div
             {...getRootProps()}
-            className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+            className="bg-yellow-100 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
           >
             <input {...getInputProps()} />
             <div className="flex justify-center mb-4">
               <i className="bx bxs-cloud-upload text-5xl text-blue-500"></i>
             </div>
             <h3 className="text-lg font-medium text-gray-900">Drag and drop your PDF here</h3>
-            <p className="mt-1 text-sm text-gray-500">or click to browse files</p>
+            <p className="mt-1 text-sm text-gray-700">or click to browse files</p>
             <button
               type="button"
               className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
@@ -91,12 +91,12 @@ const PDFSummarizer = () => {
 
           {/* Summary Length Dropdown */}
           <div className="mt-8">
-            <label htmlFor="summaryLength" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="summaryLength" className="block text-lg font-medium text-gray-700 mb-2">
               Summary Length
             </label>
             <div className="relative inline-block w-full text-left">
               <div
-                className="cursor-pointer border border-gray-300 bg-white rounded-lg shadow-sm pl-4 pr-10 py-3 text-base text-gray-700 hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                className="bg-yellow-100 cursor-pointer border border-gray-300 rounded-lg shadow-sm pl-4 pr-10 py-3 text-base text-gray-700 hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
                 {summaryLength === 'short' ? 'Short (Key Points)' :
@@ -173,14 +173,14 @@ const PDFSummarizer = () => {
 
         {/* Summary Display */}
         <div>
-              <label htmlFor="summaryText" className="block text-sm font-medium text-gray-700 mb-2">
-                AI Summary
+              <label htmlFor="summaryText" className="block text-lg font-medium text-gray-700 mb-2">
+                Summary
               </label>
               <div className="relative">
                 <textarea
                   id="summaryText"
                   rows={8}
-                  className="shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-lg transition-all duration-150 ease-in-out p-4 pr-10"
+                  className="bg-yellow-100 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-lg transition-all duration-150 ease-in-out p-4 pr-10"
                   placeholder={isProcessing ? "Generating summary..." : "Your summary will appear here..."}
                   value={summary}
                   readOnly

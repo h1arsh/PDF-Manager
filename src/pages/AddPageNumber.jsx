@@ -80,14 +80,14 @@ const AddPageNumber = () => {
           {/* File Upload Area */}
           <div 
             {...getRootProps()} 
-            className="bg-white border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+            className="bg-yellow-100 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
           >
             <input {...getInputProps()} />
             <div className="flex justify-center mb-4">
               <i className="bx bxs-cloud-upload text-5xl text-blue-500"></i>
             </div>
             <h3 className="text-lg font-medium text-gray-900">Drag and drop your PDF here</h3>
-            <p className="mt-1 text-sm text-gray-500">or click to browse files</p>
+            <p className="mt-1 text-sm text-gray-700">or click to browse files</p>
             <button 
               type="button"
               className="mt-6 bg-blue-600 hover:bg-blue-800 text-white font-medium py-2 px-6 rounded-lg transition-colors"
@@ -109,7 +109,7 @@ const AddPageNumber = () => {
               </label>
               <select
                 id="position"
-                className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="bg-yellow-100 w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={position}
                 onChange={(e) => setPosition(e.target.value)}
               >
@@ -127,7 +127,7 @@ const AddPageNumber = () => {
               </label>
               <select
                 id="size"
-                className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="bg-yellow-100 w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={size}
                 onChange={(e) => setSize(e.target.value)}
               >

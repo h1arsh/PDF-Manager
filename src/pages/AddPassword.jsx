@@ -109,7 +109,7 @@ const AddPassword = () => {
               Password Protect PDF
             </span>
           </h1>
-          <h5 className="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">
+          <h5 className="mt-3 text-xl text-gray-700 max-w-2xl mx-auto">
             Add password protection to secure your sensitive PDF documents.
           </h5>
         </div>
@@ -120,7 +120,7 @@ const AddPassword = () => {
             {/* File Upload Area */}
             <div 
               {...getRootProps()} 
-              className="bg-white border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer mb-8"
+              className="bg-yellow-100 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer mb-8"
             >
               <input {...getInputProps()} />
               <div className="flex justify-center mb-4">
@@ -129,7 +129,7 @@ const AddPassword = () => {
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-gray-900">Drag and drop your PDF here</h3>
-              <p className="mt-1 text-sm text-gray-500">or click to browse files</p>
+              <p className="mt-1 text-sm text-gray-700">or click to browse files</p>
               <button 
                 type="button"
                 className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
@@ -160,7 +160,7 @@ const AddPassword = () => {
             )}
 
             {/* Password Settings */}
-            <div className="bg-gray-50 p-6 rounded-lg mb-6">
+            <div className=" p-6 rounded-lg mb-6">
               <h3 className="text-lg font-medium text-gray-900 mb-4">Password Protection</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -174,7 +174,7 @@ const AddPassword = () => {
                       id="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                       placeholder="Enter password"
                       required
                     />
@@ -196,7 +196,7 @@ const AddPassword = () => {
                       )}
                     </button>
                   </div>
-                  <p className="mt-1 text-xs text-gray-500">Minimum 8 characters with uppercase, lowercase, and numbers</p>
+                  <p className="mt-1 text-sm text-gray-700">Minimum 8 characters with uppercase, lowercase, and numbers</p>
                 </div>
                 
                 <div>
@@ -208,7 +208,7 @@ const AddPassword = () => {
                     id="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                    className="bg-yellow-100 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Confirm password"
                     required
                   />

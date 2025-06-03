@@ -60,7 +60,7 @@ const DeletePDFPages = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="bg-gradient-to-t from-cyan-200 to-blue-200 mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <Helmet>
           <title>PDF Verse - Delete PDF Pages Online</title>
           <meta name="description" content="Remove specific pages from your PDF document and save the result as a new file" />
@@ -72,7 +72,7 @@ const DeletePDFPages = () => {
               Delete PDF Pages
             </span>
           </h1>
-          <h5 className="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">
+          <h5 className="mt-3 text-xl text-gray-700 max-w-2xl mx-auto">
             Remove PDF pages online and save result as new PDF
           </h5>
         </div>
@@ -82,7 +82,7 @@ const DeletePDFPages = () => {
             {/* File Upload Area */}
             <div 
               {...getRootProps()} 
-              className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
+              className="bg-yellow-100 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors cursor-pointer"
             >
               <input {...getInputProps()} />
               <div className="flex justify-center mb-4">
@@ -114,10 +114,10 @@ const DeletePDFPages = () => {
                 value={pageNumbers}
                 onChange={(e) => setPageNumbers(e.target.value)}
                 placeholder="Example: 1, 3-5, 7"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                className="bg-yellow-100 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 required
               />
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm text-gray-700">
                 Separate pages with commas. Use hyphen for ranges (e.g., 1, 3-5 deletes pages 1, 3, 4, and 5).
               </p>
             </div>
