@@ -6,8 +6,6 @@ const PDFSummarizer = () => {
   const [pdfFile, setPdfFile] = useState(null);
   const [summary, setSummary] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [summaryLength, setSummaryLength] = useState('medium');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: '.pdf',
@@ -28,7 +26,6 @@ const PDFSummarizer = () => {
     try {
       const formData = new FormData();
       formData.append('pdfFile', pdfFile);
-      formData.append('summaryLength', summaryLength);
 
       const response = await fetch('http://localhost:5000/api/pdf/summarize', {
         method: 'POST',
@@ -87,61 +84,6 @@ const PDFSummarizer = () => {
                 Selected file: {pdfFile.name}
               </p>
             )}
-          </div>
-
-          {/* Summary Length Dropdown */}
-          <div className="mt-8">
-            <label htmlFor="summaryLength" className="block text-lg font-medium text-gray-700 mb-2">
-              Summary Length
-            </label>
-            <div className="relative inline-block w-full text-left">
-              <div
-                className="bg-yellow-100 cursor-pointer border border-gray-300 rounded-lg shadow-sm pl-4 pr-10 py-3 text-base text-gray-700 hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              >
-                {summaryLength === 'short' ? 'Short (Key Points)' :
-                 summaryLength === 'medium' ? 'Medium (Detailed Summary)' :
-                 'Long (Comprehensive Summary)'}
-
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <svg
-                    className={`h-5 w-5 text-gray-500 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.23 7.21a.75.75 0 011.06.02L10 10.585l3.71-3.354a.75.75 0 111.02 1.1l-4.25 3.84a.75.75 0 01-1.02 0l-4.25-3.84a.75.75 0 01.02-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              {isDropdownOpen && (
-                <div className="absolute z-10 mt-2 w-full rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <ul className="py-1 text-gray-700 text-sm">
-                    {[
-                      { value: 'short', label: 'Short (Key Points)' },
-                      { value: 'medium', label: 'Medium (Detailed Summary)' },
-                      { value: 'long', label: 'Long (Comprehensive Summary)' },
-                    ].map(option => (
-                      <li
-                        key={option.value}
-                        className={`block px-4 py-2 hover:bg-blue-100 cursor-pointer ${summaryLength === option.value ? 'bg-blue-50 font-medium text-blue-700' : ''}`}
-                        onClick={() => {
-                          setSummaryLength(option.value);
-                          setIsDropdownOpen(false);
-                        }}
-                      >
-                        {option.label}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
           </div>
 
           {/* Submit Button */}

@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
+    "@xenova/transformers": "^2.17.2",
     "adm-zip": "^0.5.16",
     "archiver": "^7.0.1",
     "axios": "^1.9.0",

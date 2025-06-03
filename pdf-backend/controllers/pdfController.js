@@ -1,4 +1,6 @@
 const { PDFDocument, rgb } = require('pdf-lib');
+const fs = require('fs').promises;
+const path = require('path');
 
 const processPdf = async (req, res) => {
   try {
@@ -9,8 +11,12 @@ const processPdf = async (req, res) => {
       return res.status(400).json({ error: 'No PDF file uploaded' });
     }
 
+    // Read the file from disk
+    const filePath = path.join(__dirname, '../uploads', pdfFile.filename);
+    const fileData = await fs.readFile(filePath);
+
     // Load PDF
-    const pdfDoc = await PDFDocument.load(pdfFile.buffer);
+    const pdfDoc = await PDFDocument.load(fileData);
     const pages = pdfDoc.getPages();
 
     // Set font size
@@ -47,6 +53,10 @@ const processPdf = async (req, res) => {
 
     // Send back modified PDF
     const modifiedPdf = await pdfDoc.save();
+    
+    // Clean up the uploaded file
+    await fs.unlink(filePath);
+
     res.set({
       'Content-Type': 'application/pdf',
       'Content-Disposition': 'attachment; filename=numbered.pdf'

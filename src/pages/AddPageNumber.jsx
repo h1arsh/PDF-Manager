@@ -2,27 +2,34 @@ import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Helmet } from 'react-helmet';
 
-
 const AddPageNumber = () => {
   const [pdfFile, setPdfFile] = useState(null);
   const [position, setPosition] = useState('bottom-right');
   const [size, setSize] = useState('medium');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState(null);
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: '.pdf',
+    accept: {
+      'application/pdf': ['.pdf']
+    },
     maxFiles: 1,
     onDrop: acceptedFiles => {
       setPdfFile(acceptedFiles[0]);
+      setError(null); // Clear previous errors when new file is selected
     }
   });
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-  if (!pdfFile) return;
-  
+  if (!pdfFile) {
+    setError('Please select a PDF file first');
+    return;
+  }
+
   setIsProcessing(true);
-  
+  setError(null);
+
   try {
     const formData = new FormData();
     formData.append('pdfFile', pdfFile);
@@ -30,29 +37,31 @@ const AddPageNumber = () => {
     formData.append('size', size);
 
     const response = await fetch('http://localhost:5000/api/pdf/add-page-numbers', {
-        method: 'POST',
-        body: formData,
-      });
+      method: 'POST',
+      body: formData,
+      // Note: Don't set Content-Type header manually
+    });
 
     if (!response.ok) {
-      throw new Error('Failed to process PDF');
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || 'Failed to process PDF');
     }
 
-    // Convert response to blob
     const blob = await response.blob();
-      const downloadUrl = URL.createObjectURL(blob);
-      
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-      a.download = `numbered-${pdfFile.name}`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(downloadUrl);
+    const downloadUrl = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = downloadUrl;
+    a.download = `numbered-${pdfFile.name}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    setTimeout(() => URL.revokeObjectURL(downloadUrl), 100);
 
   } catch (error) {
     console.error('Error:', error);
-    alert(`Error: ${error.message}. Please try again.`);
+    setError(error.message);
   } finally {
     setIsProcessing(false);
   }
@@ -101,6 +110,13 @@ const AddPageNumber = () => {
             )}
           </div>
 
+          {/* Error Message */}
+          {error && (
+            <div className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+              {error}
+            </div>
+          )}
+
           {/* Options */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -139,24 +155,24 @@ const AddPageNumber = () => {
           </div>
 
           <div className="mt-8 flex justify-center">
-          <button 
-            type="submit" 
-            className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
-            disabled={!pdfFile || isProcessing}
-          >
-            {isProcessing ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Processing...
-              </span>
-            ) : (
-              'Add Page Numbers & Download'
-            )}
-          </button>
-        </div>
+            <button 
+              type="submit" 
+              className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!pdfFile || isProcessing}
+            >
+              {isProcessing ? (
+                <span className="flex items-center justify-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Processing...
+                </span>
+              ) : (
+                'Add Page Numbers & Download'
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>
